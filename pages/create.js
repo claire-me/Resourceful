@@ -72,7 +72,7 @@ const [resourcesLoading, setResourcesLoading] = useState(false);
 						You need Chrome to be
 						<br /> able to run this app.
 					</div>
-					<div class="">
+					<div>
 						<button className={style.button} onClick={connectAccount}>
 							Connect MetaMask Wallet
 						</button>
@@ -169,9 +169,9 @@ const [resourcesLoading, setResourcesLoading] = useState(false);
 						</div>
 					</div>
 				</div>
-				<div class="md:flex md:items-center">
-					<div class="md:w-[6.3rem]"></div>
-					<div class="">
+				<div className="md:flex md:items-center">
+					<div className="md:w-[6.3rem]"></div>
+					<div>
 						<button
 							className="border-[#f5f5f5] bg-[#f5f5f5] p-[0.6rem] font-semibold rounded-lg cursor-pointer"
 							type="submit"

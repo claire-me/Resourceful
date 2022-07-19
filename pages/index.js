@@ -102,7 +102,7 @@ const connectAccount = async () => {
             You need Chrome to be
             <br /> able to run this app.
           </div>
-				<div class="">
+				<div>
 					<button
 					className={style.button}
 					onClick={connectAccount}
