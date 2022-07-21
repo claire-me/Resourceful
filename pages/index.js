@@ -1,4 +1,5 @@
 import React from "react";
+import Head from 'next/head';
 import Link from 'next/link'
 // 0x46517b7794a6ddbcfa28ebe30d5310588389bcd1;
 import { useState, useEffect } from "react";
@@ -142,7 +143,14 @@ const connectAccount = async () => {
 
    if (resources.length > 0) {
     return (
-			<div className={style.resourcesWrapper}>
+	    
+		<div>
+	    <Head>
+        <title>Next App</title>
+        <link rel="icon" href="/favicon.ico" />
+      	</Head>
+	    <div className={style.resourcesWrapper}>
+	    
 				<h1 className={style.title}>Web3 Learning Resources</h1>
 				<button type="link" className={style.addResourceButton}>
 					<Link href="/create">
@@ -169,6 +177,7 @@ const connectAccount = async () => {
 					))}
 				</div>
 			</div>
+	    </div>
 		);
    }
   
