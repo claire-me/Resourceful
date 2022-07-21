@@ -158,7 +158,7 @@ const connectAccount = async () => {
 					</Link>
 				</button>
 				<div className={style.resourcesList}>
-					{resources.map((data) => (
+					{resources.map((data, i) => (
 						<div className="m-5 shadow p-2" key={i}>
 							<h3 className="text-[1rem]">
 								<b>Title:</b> {data.title}
