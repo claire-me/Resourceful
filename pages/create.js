@@ -7,23 +7,22 @@ import abi from "../utils/Resources.json";
 const style = {
 	createResourceTitle: `text-[2rem] m-4 text-[#f5f5f5] text-center`,
 	resourceLink: `text-[#6b21a8] underline`,
+	resourceInput: `bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700`,
 	addResourceButton: `border border-[#f5f5f5] mt-2 push rounded-lg bg-[#f5f5f5] p-[0.8rem] text-xl font-semibold`,
 	resourcesWrapper: ` justify-center items-center  h-screen w-screen`,
 	resourcesList: `flex flex-wrap text-white justify-center items-center`,
-	walletConnectWrapper: `flex flex-col justify-center items-center h-screen w-screen bg-[#262e3f]  `,
-	button: `border border-[#f5f5f5] bg-[#f5f5f5] p-[0.8rem] text-xl font-semibold rounded-lg cursor-pointer`,
-	details: `text-lg text-center text=[#282b2f] font-semibold`,
+	walletConnectWrapper: `flex flex-col justify-center items-center h-screen w-screen bg-[#0f172a]  `,
+	formButtom: `border-[#f5f5f5] bg-[#f5f5f5] p-[0.6rem] font-semibold rounded-lg cursor-pointer`,
+	details: `text-[1.5rem] text-center text-white font-semibold`,
 };
 
 export default function Create() {
 	const [ethereum, setEthereum] = useState(undefined);
 	const [connectedAccount, setConnectedAccount] = useState(undefined);
-const [mining, setMining] = useState(false);
-const [resourcesLoading, setResourcesLoading] = useState(false);
+	const [mining, setMining] = useState(false);
 	const [title, setTitle] = useState('');
 	const [url, setUrl] = useState('');
 	const [description, setDescription] = useState("");
-
 	const contractAddress = "0xEB40026995Bf7E7734F864e75329fB5Be65d84cF";
 	const contractABI = abi.abi;
 
@@ -50,11 +49,6 @@ const [resourcesLoading, setResourcesLoading] = useState(false);
     useEffect(() => { getConnectedAccount(), [] });
 
 	const connectAccount = async () => {
-		if (!ethereum) {
-			alert("MetaMask is required to connect an account");
-			return;
-		}
-
 		const accounts = await ethereum.request({ method: "eth_requestAccounts" });
 		handleAccounts(accounts);
 	};
@@ -69,8 +63,11 @@ const [resourcesLoading, setResourcesLoading] = useState(false);
 				<div className="top-bg"></div>
 				<div className="bottom-bg">
 					<div className={style.details}>
-						You need Chrome to be
-						<br /> able to run this app.
+						<p>
+							You need to be connected to metamask
+							<br /> able to create a resource.
+						
+						</p>
 					</div>
 					<div>
 						<button className={style.button} onClick={connectAccount}>
@@ -81,6 +78,7 @@ const [resourcesLoading, setResourcesLoading] = useState(false);
 			</div>
 		);
 	}
+
 	const submitCreate = async (e) => {
 		e.preventDefault();
 
@@ -131,7 +129,7 @@ const [resourcesLoading, setResourcesLoading] = useState(false);
 								type="text"
 								placeholder="Learn Web3 Dao"
 								required
-								className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 "
+								className={style.resourceInput}
 								value={title}
 								onChange={(e) => setTitle(e.target.value)}
 							/>
@@ -146,7 +144,7 @@ const [resourcesLoading, setResourcesLoading] = useState(false);
 								placeholder="learnweb3.io"
 								type="text"
 								required
-								className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700"
+								className={style.resourceInput}
 								value={url}
 								onChange={(e) => setUrl(e.target.value)}
 							/>
@@ -162,7 +160,7 @@ const [resourcesLoading, setResourcesLoading] = useState(false);
 							<input
 								placeholder="Learn web3 from scratch"
 								type="text"
-								className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700"
+								className={style.resourceInput}
 								value={description}
 								onChange={(e) => setDescription(e.target.value)}
 							/>
@@ -173,7 +171,7 @@ const [resourcesLoading, setResourcesLoading] = useState(false);
 					<div className="md:w-[6.3rem]"></div>
 					<div>
 						<button
-							className="border-[#f5f5f5] bg-[#f5f5f5] p-[0.6rem] font-semibold rounded-lg cursor-pointer"
+							className={style.formButtom}
 							type="submit"
 							disabled={mining}
 							onClick={submitCreate}
