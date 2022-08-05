@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import Head from 'next/head';
+// 0x46517b7794a6ddbcfa28ebe30d5310588389bcd1;
 import { useState, useEffect } from "react";
 import abi from "../utils/Resources.json";
 import { ethers } from "ethers";
@@ -17,6 +19,7 @@ const style = {
 
 export default function Home() {
 	const [resources, setResources] = useState([]);
+		const [resourcesLoading, setResourcesLoading] = useState()
 	const contractAddress = `0xEB40026995Bf7E7734F864e75329fB5Be65d84cF`;
 	const contractABI = abi.abi;
 
@@ -38,6 +41,7 @@ export default function Home() {
 	//get all resources
 	useEffect(() => {
 		const getResources = async () => {
+			setResourcesLoading(true);
 			if (typeof window.ethereum !== "undefined") {
 				const resourcesContract = createEthereumContract();
 				try {
@@ -46,7 +50,7 @@ export default function Home() {
 					const resources = [...resourcesdata];
 					setResources(resources);
 				} finally {
-					console.log(resources);
+					setResourcesLoading(false);
 				}
 			}
 		};
@@ -55,7 +59,14 @@ export default function Home() {
 
 	// Return all available resources
 		return (
-			<div className={style.resourcesWrapper}>
+	    
+		<div>
+	    <Head>
+        <title>Next App</title>
+        <link rel="icon" href="/favicon.ico" />
+      	</Head>
+	    <div className={style.resourcesWrapper}>
+	    
 				<h1 className={style.title}>Web3 Learning Resources</h1>
 				<button type="link" className={style.addResourceButton}>
 					<Link href="/create">
@@ -83,8 +94,21 @@ export default function Home() {
 					))}
 				</div>
 			</div>
+	    </div>
 		);
 
+	  if (resourcesLoading) {
+			return (
+				<div className="flex flex-col gap-4">
+					<button type="link" href="/create">
+						<Link href="/create">
+							<a>Create Resources</a>
+						</Link>
+					</button>
+				</div>
+			);
+		}
+				
 	// No resources yet
 	return (
 		<div className={style.walletConnectWrapper}>
