@@ -82,11 +82,6 @@ export default function Create() {
 	const submitCreate = async (e) => {
 		e.preventDefault();
 
-		if (!ethereum) {
-			console.error("Ethereum object is required to create a keyboard");
-			return;
-		}
-
 		setMining(true);
 		try {
 			const provider = new ethers.providers.Web3Provider(ethereum);
@@ -101,6 +96,14 @@ export default function Create() {
 				title, url, description
 			);
 			console.log("Create transaction started...", createTxn.hash);
+		if (!ethereum) {
+			console.error("Ethereum object is required to create a keyboard");
+			return;
+			}
+			if (!ethereum) {
+			console.error("Ethereum object is required to create a keyboard");
+			return;
+		}
 
 			await createTxn.wait();
 			console.log("Created resources!", createTxn.hash);
